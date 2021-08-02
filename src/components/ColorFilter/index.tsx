@@ -1,16 +1,25 @@
 import React from 'react';
 import styles from './ColorFilter.module.scss';
 
+
 type ColorFilterProps = {
-  hex: string;
+  onChange: (obj: {}) => void;
 }
 
-const ColorFilter = (): JSX.Element => {
+const ColorFilter = ({ onChange }: ColorFilterProps): JSX.Element => {
+
+  const handleChange = (e: React.FormEvent<HTMLFormElement>) => {
+    const { name, checked } = e.target as HTMLInputElement;
+
+    onChange({
+      [name]: checked
+    })
+  }
 
   return (
     <div className={styles.filterRow}>
-      <form onChange={(e) => console.log(e)}>
-        <input name="red" type="checkbox"/>
+      <form onChange={handleChange}>
+        <input name="red" type="checkbox" />
         <label htmlFor="red">{'Red > 50%'}</label>
         <input name="green" type="checkbox"/>
         <label>{'Green > 50%'}</label>

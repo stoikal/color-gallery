@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './ColorView.module.scss';
 import ColorBox from '../ColorBox';
 import ColorFilter from '../ColorFilter';
@@ -16,9 +16,28 @@ type ColorViewProps = {
 }
 
 const ColorView = ({ colors, onRemove }: ColorViewProps): JSX.Element => {
+  const [filters, setFilters] = useState({ red: false, green: false, blue: false, saturation: false })
 
   const filteredColors = colors.filter(({ hex }) => {
-    const hsl = hexToHsl(hex);
+    const { r, g, b, l } = hexToHsl(hex);
+    const { red, blue, green, saturation } = filters;
+
+    if (red && r < 0.5) {
+      return false;
+    }
+
+    if (green && g < 0.5) {
+      return false;
+    }
+
+    if (blue && b < 0.5) {
+      return false;
+    }
+
+    if (saturation && l < 0.5) {
+      return false;
+    }
+
     return true;
   })
 
@@ -42,9 +61,16 @@ const ColorView = ({ colors, onRemove }: ColorViewProps): JSX.Element => {
     }
   })
 
+  const handleFilterChange = (filterChange: {}) => {
+    setFilters({
+      ...filters,
+      ...filterChange
+    })
+  }
+
   return (
     <>
-      <ColorFilter />
+      <ColorFilter onChange={handleFilterChange}/>
       <div className={styles.container}>
         {sortedColors.map((color, index) => (
           <ColorBox 

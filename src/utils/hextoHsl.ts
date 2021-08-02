@@ -32,7 +32,7 @@ const hexToHsl = (hex: string) => {
   l = l * 100;
   l = Math.round(l);
 
-  return { h, s, l }
+  return { r: red, g: green, b: blue, h, s, l }
 };
 
 export default hexToHsl;
