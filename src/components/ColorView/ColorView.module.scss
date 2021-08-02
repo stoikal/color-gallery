@@ -1,6 +1,7 @@
 .container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 120px));
+  gap: 1em;
   padding: 1em;
   // justify-content: space-between;  
 }
