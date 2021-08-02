@@ -1,30 +1,48 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './App.scss';
 import ColorView from './components/ColorView';
 import ColorInput from './components/ColorInput';
 import ColorStorage from './utils/colorStorage';
 import DEFAULT_COLORS from './constants/defaultCollors';
 
-const App = () => {
-  const [colorList, setColorList] = useState<string[]>([]);
+const defaultColors = DEFAULT_COLORS.map((hex: string) => ({ hex, protected: true }))
 
-  useEffect(() => {
-    (async () => {
-      setColorList([
-        ...DEFAULT_COLORS,
-        ...await ColorStorage.get()
-      ])
-    })()
+type colorState = {
+  hex: string;
+  protected: boolean;
+}
+
+const App = () => {
+  const [colorList, setColorList] = useState<colorState[]>([]);
+
+  const refreshColorList = useCallback(async () => {
+    const savedColors = await ColorStorage.get();
+
+    setColorList([
+      ...defaultColors,
+      ...savedColors
+        .map((hex: string) => ({ hex, protected: false }))
+    ])
   }, [])
 
-  const handleAddColor = (hex: string) => {
+  useEffect(() => {
+    refreshColorList()
+  }, [refreshColorList])
+  
+  const handleAddColor = async (hex: string) => {
     ColorStorage.add(hex);
+    refreshColorList();
+  }
+
+  const handleRemoveColor = async (hex: string) => {
+    ColorStorage.remove(hex);
+    refreshColorList();
   }
 
   return (
     <div className="App">
-      <ColorInput onAdd={handleAddColor}/>
-      <ColorView colors={colorList} />
+      <ColorInput onAdd={handleAddColor} />
+      <ColorView colors={colorList} onRemove={handleRemoveColor} />
     </div>
   );
 }

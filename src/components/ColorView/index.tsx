@@ -5,21 +5,26 @@ import ColorFilter from '../ColorFilter';
 import hexToRgb from '../../utils/hexToRgb';
 import hexToHsl from '../../utils/hextoHsl';
 
-type ColorViewProps = {
-  colors: string[];
+type color = {
+  hex: string;
+  protected: boolean;
 }
 
-const ColorView = ({ colors }: ColorViewProps): JSX.Element => {
+type ColorViewProps = {
+  colors: color[];
+  onRemove: (colorHex: string) => void;
+}
 
-  const filteredColors = colors.filter((hex) => {
+const ColorView = ({ colors, onRemove }: ColorViewProps): JSX.Element => {
+
+  const filteredColors = colors.filter(({ hex }) => {
     const hsl = hexToHsl(hex);
-    console.log(hsl)
     return true;
   })
 
   const sortedColors = filteredColors.sort((a, b) => {
-    const colorA = hexToRgb(a);
-    const colorB = hexToRgb(b);
+    const colorA = hexToRgb(a.hex);
+    const colorB = hexToRgb(b.hex);
     const compare = (a: number, b: number) => a > b ? -1 : 1;
 
     if (colorA.red === colorB.red) {
@@ -41,8 +46,13 @@ const ColorView = ({ colors }: ColorViewProps): JSX.Element => {
     <>
       <ColorFilter />
       <div className={styles.container}>
-        {sortedColors.map((hex, index) => (
-          <ColorBox hex={hex} key={index}/>
+        {sortedColors.map((color, index) => (
+          <ColorBox 
+            hex={color.hex}
+            key={index}
+            onRemove={onRemove}
+            showRemoveButton={!color.protected}
+          />
         ))}
       </div>
     </>

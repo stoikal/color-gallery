@@ -1,3 +1,4 @@
+
 const DEFAULT_COLORS = [
   '#1ABC9C',
   '#2ECC71',
