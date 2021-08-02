@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './ColorInput.module.scss'
+import isValidColorHex from '../../utils/isValidColorHex';
 
 type ColorInputProps = {
   onAdd: (colorHex: string) => void;
@@ -14,8 +15,7 @@ const ColorInput = ({ onAdd }: ColorInputProps) : JSX.Element => {
   }
   
   const isInputValid = () => {
-    const regex = /^#[0-9A-F]{6}$/i;
-    return regex.test(hex);
+    return isValidColorHex(hex);
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

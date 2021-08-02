@@ -1,7 +1,7 @@
 const NAME = 'colors';
 
 const ColorStorage = {
-  get() {
+  get(): string[] {
     const rawData = localStorage.getItem(NAME);
 
     if (rawData) {

@@ -1,4 +1,10 @@
+import isValidColorHex from "./isValidColorHex";
+
 const hexToRgb = (hex: string) => {
+  if (!isValidColorHex(hex)) {
+    throw new Error('invalid color hex string');
+  }
+
   const red = hex.slice(1,3);
   const green = hex.slice(3,5);
   const blue = hex.slice(5,7);

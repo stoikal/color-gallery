@@ -13,8 +13,8 @@ const ColorBox = ({ hex, onRemove, showRemoveButton }: ColorBoxProps): JSX.Eleme
   }
 
   return (
-    // FIXME inline style is forbidden
     <div  className={styles.box}>
+      {/* FIXME inline style is forbidden */}
       <div className={styles.color} style={{ background: hex }}></div>
       <div className={styles.label}>
         <span>{hex}</span>
