@@ -3,6 +3,7 @@ import styles from './ColorView.module.scss';
 import ColorBox from '../ColorBox';
 import ColorFilter from '../ColorFilter';
 import hexToRgb from '../../utils/hexToRgb';
+import hexToHsl from '../../utils/hextoHsl';
 
 type ColorViewProps = {
   colors: string[];
@@ -10,7 +11,13 @@ type ColorViewProps = {
 
 const ColorView = ({ colors }: ColorViewProps): JSX.Element => {
 
-  const sortedColors = colors.sort((a, b) => {
+  const filteredColors = colors.filter((hex) => {
+    const hsl = hexToHsl(hex);
+    console.log(hsl)
+    return true;
+  })
+
+  const sortedColors = filteredColors.sort((a, b) => {
     const colorA = hexToRgb(a);
     const colorB = hexToRgb(b);
     const compare = (a: number, b: number) => a > b ? -1 : 1;

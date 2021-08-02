@@ -5,7 +5,4 @@
   background: #2ECC71;
   background-color: attr(data-hex);
 
-  &:before {
-    content: attr(data-hex)
-  }
 }
