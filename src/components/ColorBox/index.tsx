@@ -5,7 +5,7 @@ type ColorBoxProps = {
   hex: string;
 }
 
-const ColorBox = ({ hex }: ColorBoxProps): JSX.Element => {
+const ColorBox = ({ hex }: ColorBoxProps): JSX.Element => { 
   return (
     <div className={styles.box} data-hex={hex}>
       {/* {hex} */}
