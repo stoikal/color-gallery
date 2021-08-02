@@ -1,0 +1,11 @@
+.box {
+  border: 1px solid black;
+  width: 120px;
+  height: 120px;
+  background: #2ECC71;
+  background-color: attr(data-hex);
+
+  &:before {
+    content: attr(data-hex)
+  }
+}

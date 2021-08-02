@@ -1,0 +1,17 @@
+.inputRow {
+  padding: 1em;
+
+  span, input {
+    margin-right: 1em;
+  }
+
+  input {
+    font-size: 1em;
+    padding: 4px;
+  }
+
+  button {
+    padding: 4px;
+    cursor: pointer;
+  }
+}
