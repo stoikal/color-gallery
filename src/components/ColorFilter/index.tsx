@@ -1,9 +1,15 @@
 import React from 'react';
 import styles from './ColorFilter.module.scss';
 
+type filterChange = {
+  red?: boolean;
+  green?: boolean;
+  blue?: boolean;
+  saturation?: boolean;
+}
 
 type ColorFilterProps = {
-  onChange: (obj: {}) => void;
+  onChange: (obj: filterChange) => void;
 }
 
 const ColorFilter = ({ onChange }: ColorFilterProps): JSX.Element => {
