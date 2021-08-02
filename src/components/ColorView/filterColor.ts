@@ -12,22 +12,22 @@ type filters = {
 }
 
 const createFilterFn = (filters: filters) => ({ hex }: color) => {
-  const { r, g, b, l } = hexToHsl(hex);
+  const { r, g, b, s } = hexToHsl(hex);
   const { red, blue, green, saturation } = filters;
-  
-  if (red && r < 0.5) {
+
+  if (red && r / 255 < 0.5) {
     return false;
   }
 
-  if (green && g < 0.5) {
+  if (green && g / 255 < 0.5) {
     return false;
   }
 
-  if (blue && b < 0.5) {
+  if (blue && b / 255 < 0.5) {
     return false;
   }
 
-  if (saturation && l < 0.5) {
+  if (saturation && s / 100 < 0.5) {
     return false;
   }
 

@@ -19,19 +19,19 @@ const ColorStorage = {
   },
 
   remove(hex: string) {
-    let temp = this.get();
-    const index = temp.indexOf(hex);
+    let arr = this.get();
+    const index = arr.indexOf(hex);
 
     if (index > -1) {
-      temp = [
-        ...temp.slice(0, index),
-        ...temp.slice(index + 1)
+      arr = [
+        ...arr.slice(0, index),
+        ...arr.slice(index + 1)
       ]
     }
 
     localStorage.setItem(
       NAME, 
-      JSON.stringify(temp)
+      JSON.stringify(arr)
     );
 
   }

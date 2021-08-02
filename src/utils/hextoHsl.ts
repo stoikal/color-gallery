@@ -1,13 +1,13 @@
 import hexToRgb from "./hexToRgb";
 
 const hexToHsl = (hex: string) => {
-  let { red, green, blue } = hexToRgb(hex);
-  red /= 255;
-  green /= 255;
-  blue /= 255;
+  const { red, green, blue } = hexToRgb(hex);
+  const r = red / 255;
+  const g = green / 255;
+  const b = blue / 255;
 
-  const max = Math.max(red, green, blue);
-  const min = Math.min(red, green, blue);
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
 
   let h = 0;
   let s = 0;
@@ -18,9 +18,15 @@ const hexToHsl = (hex: string) => {
     s = l > 0.5 ? delta / (2 - max - min) : delta / (max + min);
 
     switch(max) {
-      case red: h = (green - blue) / delta + (green < blue ? 6 : 0); break;
-      case green: h = (blue - red) / delta + 2; break;
-      case blue: h = (red - green) / delta + 4; break;
+      case red: 
+        h = (g - b) / delta + (g < b ? 6 : 0); 
+        break;
+      case green: 
+        h = (b - r) / delta + 2; 
+        break;
+      case blue: 
+        h = (r - g) / delta + 4; 
+        break;
     }
 
     h /= 6;
