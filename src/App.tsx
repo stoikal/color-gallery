@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './App.scss';
 import ColorView from './components/ColorView';
 import ColorInput from './components/ColorInput';
-import DEFAULT_COLORS from './constants/defaultCollors';
 import ColorStorage from './utils/colorStorage';
+import DEFAULT_COLORS from './constants/defaultCollors';
 
 const App = () => {
   const [colorList, setColorList] = useState<string[]>([]);

@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './ColorView.module.scss';
 import ColorBox from '../ColorBox';
+import ColorFilter from '../ColorFilter';
 
 type ColorViewProps = {
   colors: string[];
@@ -8,11 +9,14 @@ type ColorViewProps = {
 
 const ColorView = ({ colors }: ColorViewProps): JSX.Element => {
   return (
-    <div className={styles.container}>
-      {colors.map((hex, index) => (
-        <ColorBox hex={hex} key={index}/>
-      ))}
-    </div>
+    <>
+      <ColorFilter />
+      <div className={styles.container}>
+        {colors.map((hex, index) => (
+          <ColorBox hex={hex} key={index}/>
+        ))}
+      </div>
+    </>
   )
 };
 
